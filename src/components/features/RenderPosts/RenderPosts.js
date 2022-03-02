@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button'
 
 const RenderPosts = () => {
   const posts = useSelector(state => getAllPosts(state));
-  console.log(posts);
 
   return (
     <div className="d-flex justify-content-start flex-wrap row">
@@ -17,9 +16,13 @@ const RenderPosts = () => {
           <Card.Body>
             <Card.Title>{ post.title }</Card.Title>
             <Card.Text>
-              <p><strong>Author: </strong>{post.author}</p>
-              <p><strong>Published: </strong>{post.publishedDate}</p>
-              <p>{post.shortDescription}</p>
+              <strong>Author: </strong>{post.author}
+            </Card.Text>  
+            <Card.Text>
+              <strong>Published: </strong>{post.publishedDate}
+            </Card.Text>
+            <Card.Text>
+              {post.shortDescription}
             </Card.Text>
             <Button as={Link} to={"/post/" + post.id}>Read more</Button> 
           </Card.Body>
