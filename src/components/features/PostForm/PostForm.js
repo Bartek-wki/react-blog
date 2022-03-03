@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button'
 import { Row } from 'react-bootstrap';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import FormGroupText from '../FormGroupText/FormGroupText';
+import FormGroupTextarea from '../FormGroupTextarea/FormGroupTextarea';
 
 
 
@@ -39,26 +41,11 @@ const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPubl
   return (
     <Form className="col-10" onSubmit={handleSubmit}>
       <Row className="d-flex flex-column">
-        <Form.Group className="mb-3 col-3">
-          <Form.Label>Title</Form.Label>
-          <Form.Control placeholder="Enter title" type="text" value={title} onChange={e => setTitle(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3 col-3">
-          <Form.Label>Author</Form.Label>
-          <Form.Control placeholder="Enter author" type="text" value={author} onChange={e => setAuthor(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3 col-3">
-          <Form.Label>Published</Form.Label>
-          <Form.Control placeholder="Enter published" type="text" value={publishedDate} onChange={e => setPublishedDate(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3 col-10">
-          <Form.Label>Short description</Form.Label>
-          <Form.Control placeholder="Leave a comment here" style={{ height: '100px' }} type="text" as="textarea" value={shortDescription} onChange={e => setShortDescription(e.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3 col-10">
-          <Form.Label>Main content</Form.Label>
-          <Form.Control placeholder="Leave a comment here" style={{ height: '200px' }} type="text" as="textarea" value={content} onChange={e => setContent(e.target.value)} />
-        </Form.Group>
+        <FormGroupText label={"Title"} placeholder={"Enter title"} value={title} setValue={setTitle} />
+        <FormGroupText label={"Author"} placeholder={"Enter author"} value={author} setValue={setAuthor} />
+        <FormGroupText label={"Published"} placeholder={"Enter published"} value={publishedDate} setValue={setPublishedDate} />
+        <FormGroupTextarea label={"Short description"} height={"100px"} value={shortDescription} setValue={setShortDescription} />
+        <FormGroupTextarea label={"Main content"} height={"200px"} value={content} setValue={setContent} />
       </Row>
       <Button variant="primary" type="submit">
         {actionText}
