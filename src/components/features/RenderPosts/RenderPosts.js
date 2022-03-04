@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getAllPosts } from '../../../redux/postsRedux';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { dateToStr } from '../../../utils/dateToStr';
 
 
 
@@ -19,7 +20,7 @@ const RenderPosts = () => {
               <strong>Author: </strong>{post.author}
             </Card.Text>  
             <Card.Text>
-              <strong>Published: </strong>{post.publishedDate}
+              <strong>Published: </strong>{dateToStr(post.publishedDate)}
             </Card.Text>
             <Card.Text>
               {post.shortDescription}

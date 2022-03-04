@@ -1,8 +1,8 @@
 import Form from 'react-bootstrap/Form'
 
 
-const FormGroupTextarea = ({label, height, value, setValue}) => {
-
+const FormGroupTextarea = ({ label, height, value, setValue }) => {
+  
   return (
     <Form.Group className="mb-3 col-10">
       <Form.Label>{label}</Form.Label>
