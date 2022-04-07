@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { getPostById } from '../../../redux/postsRedux';
 
 
-const EditPostForm = ({id}) => {
+const EditPostForm = ({ id }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
@@ -28,6 +28,7 @@ const EditPostForm = ({id}) => {
       initialPublishedDate={postData.publishedDate}
       initialShortDescription={postData.shortDescription}
       initialContent={postData.content}
+      initialCategory={postData.category}
     />
   )
 }
