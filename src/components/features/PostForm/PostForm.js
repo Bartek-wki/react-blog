@@ -9,11 +9,13 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//CSS Modules, react-datepicker-cssmodules.css
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import { useForm } from "react-hook-form";
+import { useSelector } from 'react-redux';
+import { getAllCategories } from '../../../redux/categoriesRedux';
 
-const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPublishedDate, initialShortDescription, initialContent}) => {
+
+const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPublishedDate, initialShortDescription, initialContent, initialCategory}) => {
   
   if (initialTitle === undefined) {initialTitle = ''}
   if (initialAuthor === undefined) {initialAuthor = ''}
@@ -21,8 +23,11 @@ const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPubl
   if (initialShortDescription === undefined) {initialShortDescription = ''}
   if (initialShortDescription === undefined) {initialShortDescription = ''}
   if (initialContent === undefined) { initialContent = '' }
+  if (initialCategory === undefined) {initialCategory = ''}
   
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
+
+  const categories = useSelector(state => getAllCategories(state));
   
   const [title, setTitle] = useState(initialTitle)
   const [author, setAuthor] = useState(initialAuthor)
@@ -31,12 +36,13 @@ const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPubl
   const [content, setContent] = useState(initialContent)
   const [contentError, setContentError] = useState(false)
   const [dateError, setDateError] = useState(false)
+  const [category, setCategory] = useState(initialCategory)
 
   const handleSubmit = () => {
     setContentError(!content)
     setDateError(!publishedDate)
     if (content && publishedDate) {
-      action({ title, author, publishedDate, shortDescription, content })
+      action({ title, author, publishedDate, category, shortDescription, content })
     }
   }
  
@@ -57,8 +63,20 @@ const PostForm = ({ action, actionText, initialTitle, initialAuthor, initialPubl
           label={"Author"}
           placeholder={"Enter author"}
           value={author} setValue={setAuthor} />
-        <DatePicker selected={publishedDate} onChange={(date) => setPublishedDate(date)} />
-        {dateError && <small className="d-block form-text text-danger mt-2">Date can't be empty</small>}
+        <Form.Group className="mb-3">
+          <Form.Label>Date</Form.Label>
+          <DatePicker selected={publishedDate} onChange={(date) => setPublishedDate(date)} />
+          {dateError && <small className="d-block form-text text-danger mt-2">Date can't be empty</small>}
+        </Form.Group>
+        <Form.Group className="mb-3 col-3">
+          <Form.Label>Categories</Form.Label>
+          <Form.Select aria-label="Default select example" value={category} onChange={e => setCategory(e.target.value)}>
+            <option>Select categories</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.name}>{category.name}</option>
+            ))}
+          </Form.Select>
+        </Form.Group>
         <FormGroupTextarea
           useFormRegister={{ ...register("shortDescription", { required: true, minLength:20 }) }}
           useFormError={errors}
@@ -80,7 +98,7 @@ PostForm.propTypes = {
   actionText: PropTypes.string.isRequired,
   initialTitle: PropTypes.string,
   initialAuthor: PropTypes.string,
-  initialPublishedDate: PropTypes.string,
+  initialPublishedDate: PropTypes.object,
   initialShortDescription: PropTypes.string,
   initialContent: PropTypes.string,
 }

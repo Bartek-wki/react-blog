@@ -1,24 +1,27 @@
+import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getAllPosts } from '../../../redux/postsRedux';
+import { getPostsByCategory } from '../../../redux/postsRedux';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { dateToStr } from '../../../utils/dateToStr';
+import { Link } from 'react-router-dom';
 
 
 
-const RenderPosts = () => {
-  const posts = useSelector(state => getAllPosts(state));
+
+const RenderPostsofSelectCategories = () => {
+  const { category } = useParams();
+  const postsData = useSelector(state => getPostsByCategory(state, category));
 
   return (
     <div className="d-flex justify-content-start flex-wrap row">
-      {posts.map(post => (
+      {postsData.map(post => (
         <Card key={post.id} className="m-3 col-12 col-lg-5 col-xl-3">
           <Card.Body>
-            <Card.Title>{ post.title }</Card.Title>
+            <Card.Title>{post.title}</Card.Title>
             <Card.Text>
               <strong>Author: </strong>{post.author}
-            </Card.Text>  
+            </Card.Text>
             <Card.Text>
               <strong>Published: </strong>{dateToStr(post.publishedDate)}
             </Card.Text>
@@ -28,7 +31,7 @@ const RenderPosts = () => {
             <Card.Text>
               {post.shortDescription}
             </Card.Text>
-            <Button as={Link} to={"/post/" + post.id}>Read more</Button> 
+            <Button as={Link} to={"/post/" + post.id}>Read more</Button>
           </Card.Body>
         </Card>
       ))}
@@ -36,4 +39,4 @@ const RenderPosts = () => {
   );
 }
 
-export default RenderPosts;
+export default RenderPostsofSelectCategories;

@@ -6,7 +6,8 @@ const initialState = {
       shortDescription: 'Morbi viverra leo non neque tincidunt, congue vestibulum...',
       content: 'Vestibulum',
       publishedDate: new Date('2022-02-15'),
-      author: 'John Doe'
+      author: 'John Doe',
+      category: 'sport'
     },
     {
       id: '2',
@@ -14,7 +15,8 @@ const initialState = {
       shortDescription: 'Etiam ultricies massa non convallis varius...',
       content: 'Pellentesque convallis',
       publishedDate: new Date('2022-02-21'),
-      author: 'Anna Doe'
+      author: 'Anna Doe',
+      category: 'news'
     },
     {
       id: '3',
@@ -22,7 +24,8 @@ const initialState = {
       shortDescription: 'Cras sodales sapien at bibendum semper...',
       content: 'Vestibulum',
       publishedDate: new Date('2022-03-07'),
-      author: 'Jim Brown'
+      author: 'Jim Brown',
+      category: 'movies'
     },
     {
       id: '4',
@@ -30,9 +33,15 @@ const initialState = {
       shortDescription: 'Praesent interdum mi ut volutpat volutpat...',
       content: 'Quisque et sapien',
       publishedDate: new Date('2022-03-12'),
-      author: 'John Doe'
+      author: 'John Doe',
+      category: 'sport'
     },
   ],
+  categories: [
+    { id: '1', name: 'sport' },
+    { id: '2', name: 'news' },
+    {id: '3', name: 'movies'},
+  ]
 };
 
 export default initialState;
