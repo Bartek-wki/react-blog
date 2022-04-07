@@ -13,6 +13,7 @@ const App = () => {
   return (
     <Container>
       <Header />
+      <h1>Hello</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<Post />} />
